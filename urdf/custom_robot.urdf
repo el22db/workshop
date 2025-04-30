@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="custom_robot">
+
+  <gazebo>
+    <static>true</static>
+  </gazebo>
+
+  <!-- Base Box -->
+  <link name="box_link">
+    <visual>
+      <geometry>
+        <box size="0.5 0.5 0.5"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.5 0.5 0.5"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0"
+               iyy="0.01" iyz="0.0"
+               izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Cylinder 1 -->
+  <link name="cylinder_link_1">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+      <origin xyz="0 0 0.15"/>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+      <origin xyz="0 0 0.15"/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.002" ixy="0.0" ixz="0.0"
+               iyy="0.002" iyz="0.0"
+               izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- Cylinder 2 -->
+  <link name="cylinder_link_2">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+      <origin xyz="0 0 0.15"/>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+      <origin xyz="0 0 0.15"/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.002" ixy="0.0" ixz="0.0"
+               iyy="0.002" iyz="0.0"
+               izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- Cylinder 3 -->
+  <link name="cylinder_link_3">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+      <origin xyz="0 0 0.15"/>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+      <origin xyz="0 0 0.15"/>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.002" ixy="0.0" ixz="0.0"
+               iyy="0.002" iyz="0.0"
+               izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- Gripper Box 1 -->
+  <link name="gripper_box_1">
+    <visual>
+      <geometry>
+        <box size="0.02 0.06 0.12"/>
+      </geometry>
+      <origin xyz="0.06 0 0.06"/>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.02 0.06 0.12"/>
+      </geometry>
+      <origin xyz="0.06 0 0.06"/>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- Gripper Box 2 -->
+  <link name="gripper_box_2">
+    <visual>
+      <geometry>
+        <box size="0.02 0.06 0.12"/>
+      </geometry>
+      <origin xyz="-0.06 0 0.06"/>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.02 0.06 0.12"/>
+      </geometry>
+      <origin xyz="-0.06 0 0.06"/>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- Joints -->
+  <joint name="box_to_c1_joint" type="revolute">
+    <parent link="box_link"/>
+    <child link="cylinder_link_1"/>
+    <origin xyz="0 0 0.25"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="1.0" velocity="1.0"/>
+  </joint>
+
+  <joint name="c1_to_c2_joint" type="revolute">
+    <parent link="cylinder_link_1"/>
+    <child link="cylinder_link_2"/>
+    <origin xyz="0 0 0.32"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="1.0" velocity="1.0"/>
+  </joint>
+
+  <joint name="c2_to_c3_joint" type="revolute">
+    <parent link="cylinder_link_2"/>
+    <child link="cylinder_link_3"/>
+    <origin xyz="0 0 0.32"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="1.0" velocity="1.0"/>
+  </joint>
+
+  <joint name="gripper_box_1_joint" type="prismatic">
+    <parent link="cylinder_link_3"/>
+    <child link="gripper_box_1"/>
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.06" effort="10.0" velocity="0.2"/>
+    <dynamics damping="0.1" friction="0.0"/>
+  </joint>
+
+  <joint name="gripper_box_2_joint" type="prismatic">
+    <parent link="cylinder_link_3"/>
+    <child link="gripper_box_2"/>
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="0.0" upper="0.06" effort="10.0" velocity="0.2"/>
+    <dynamics damping="0.1" friction="0.0"/>
+  </joint>
+
+  <!-- Gazebo Materials -->
+  <gazebo reference="box_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="cylinder_link_1">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="cylinder_link_2">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="cylinder_link_3">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="gripper_box_1">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="gripper_box_2">
+    <material>Gazebo/White</material>
+  </gazebo>
+  
+  <gazebo>
+  <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+    <robot_param>robot_description</robot_param>
+  </plugin>
+</gazebo>
+
+
+  <!-- ROS 2 Control -->
+  <ros2_control name="GripperControl" type="system">
+  <hardware>
+    <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+  </hardware>
+  <joint name="gripper_box_1_joint">
+    <command_interface name="position"/>
+    <state_interface name="position"/>
+    <state_interface name="velocity"/>
+  </joint>
+  <joint name="gripper_box_2_joint">
+    <command_interface name="position"/>
+    <state_interface name="position"/>
+    <state_interface name="velocity"/>
+  </joint>
+</ros2_control>
+
+  <!-- Transmissions for ROS 2 Control -->
+  <transmission name="gripper_box_1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gripper_box_1_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="gripper_box_1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="gripper_box_2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gripper_box_2_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="gripper_box_2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+</robot>

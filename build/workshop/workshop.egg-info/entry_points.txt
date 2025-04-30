@@ -1,0 +1,3 @@
+[console_scripts]
+move = workshop.scripts.move:main
+

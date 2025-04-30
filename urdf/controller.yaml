@@ -1,0 +1,14 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    gripper_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+      joints:
+        - gripper_box_1_joint
+        - gripper_box_2_joint
+      state_publish_rate: 25
+      action_monitor_rate: 10.0
+      gains:
+        gripper_box_1_joint: { p: 100.0, d: 1.0, i: 0.01 }
+        gripper_box_2_joint: { p: 100.0, d: 1.0, i: 0.01 }

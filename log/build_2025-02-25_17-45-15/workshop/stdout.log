@@ -1,0 +1,37 @@
+running egg_info
+creating build/workshop/workshop.egg-info
+writing build/workshop/workshop.egg-info/PKG-INFO
+writing dependency_links to build/workshop/workshop.egg-info/dependency_links.txt
+writing entry points to build/workshop/workshop.egg-info/entry_points.txt
+writing requirements to build/workshop/workshop.egg-info/requires.txt
+writing top-level names to build/workshop/workshop.egg-info/top_level.txt
+writing manifest file 'build/workshop/workshop.egg-info/SOURCES.txt'
+reading manifest file 'build/workshop/workshop.egg-info/SOURCES.txt'
+writing manifest file 'build/workshop/workshop.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/daisy/ros2_ws/src/workshop/build/workshop/build
+creating /home/daisy/ros2_ws/src/workshop/build/workshop/build/lib
+creating /home/daisy/ros2_ws/src/workshop/build/workshop/build/lib/workshop
+copying workshop/__init__.py -> /home/daisy/ros2_ws/src/workshop/build/workshop/build/lib/workshop
+running install
+running install_lib
+creating /home/daisy/ros2_ws/src/workshop/install/workshop/lib/python3.10/site-packages/workshop
+copying /home/daisy/ros2_ws/src/workshop/build/workshop/build/lib/workshop/__init__.py -> /home/daisy/ros2_ws/src/workshop/install/workshop/lib/python3.10/site-packages/workshop
+byte-compiling /home/daisy/ros2_ws/src/workshop/install/workshop/lib/python3.10/site-packages/workshop/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/daisy/ros2_ws/src/workshop/install/workshop/share/ament_index
+creating /home/daisy/ros2_ws/src/workshop/install/workshop/share/ament_index/resource_index
+creating /home/daisy/ros2_ws/src/workshop/install/workshop/share/ament_index/resource_index/packages
+copying resource/workshop -> /home/daisy/ros2_ws/src/workshop/install/workshop/share/ament_index/resource_index/packages
+copying package.xml -> /home/daisy/ros2_ws/src/workshop/install/workshop/share/workshop
+creating /home/daisy/ros2_ws/src/workshop/install/workshop/share/workshop/launch
+copying launch/load_world.launch.py -> /home/daisy/ros2_ws/src/workshop/install/workshop/share/workshop/launch
+copying launch/load_moveit_arm.launch.py -> /home/daisy/ros2_ws/src/workshop/install/workshop/share/workshop/launch
+copying launch/load_arm.launch.py -> /home/daisy/ros2_ws/src/workshop/install/workshop/share/workshop/launch
+copying launch/load_workshop.launch.py -> /home/daisy/ros2_ws/src/workshop/install/workshop/share/workshop/launch
+running install_egg_info
+Copying build/workshop/workshop.egg-info to /home/daisy/ros2_ws/src/workshop/install/workshop/lib/python3.10/site-packages/workshop-0.0.0-py3.10.egg-info
+running install_scripts
+Installing move script to /home/daisy/ros2_ws/src/workshop/install/workshop/lib/workshop
+writing list of installed files to '/home/daisy/ros2_ws/src/workshop/build/workshop/install.log'
