@@ -8,7 +8,6 @@ def generate_launch_description():
     controllers_path = os.path.join(models_path, "controller.yaml")
 
     return LaunchDescription([
-        # 1. Start robot_state_publisher (optional but useful)
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
@@ -19,7 +18,6 @@ def generate_launch_description():
             }]
         ),
 
-        # 2. Start ros2_control_node
         Node(
             package="controller_manager",
             executable="ros2_control_node",
@@ -32,7 +30,6 @@ def generate_launch_description():
             output="screen"
         ),
 
-        # 3. Spawn robot in Gazebo
         TimerAction(
             period=5.0,
             actions=[
@@ -48,7 +45,6 @@ def generate_launch_description():
             ]
         ),
 
-        # 4. Spawn controller
         TimerAction(
             period=7.0,
             actions=[
