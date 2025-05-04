@@ -15,7 +15,7 @@ class MultiCameraSubscriber(Node):
         self.bridge = CvBridge()
         self.last_color_positions = {}
         self.last_printed_positions = {}  # To store the last printed world positions
-        self.position_threshold = 0.1  # Increased threshold (10 cm)
+        self.position_threshold = 0.1  # Movement check 10cm
         self.position_stable_frames = 5  # Frames to wait before updating
         self.color_frame_stability = {}  # Track stability of frames for each color
 
@@ -113,24 +113,24 @@ class MultiCameraSubscriber(Node):
                                 # Pixel to camera frame
                                 point_cam = self.deproject_pixel_to_point(cx, cy, depth)
 
-                                # Rotate by camera yaw (Z rotation only)
+                                # Rotate by camera yaw (Z only)
                                 x_rot = math.cos(cam_yaw) * point_cam[0] - math.sin(cam_yaw) * point_cam[1]
                                 y_rot = math.sin(cam_yaw) * point_cam[0] + math.cos(cam_yaw) * point_cam[1]
 
                                 # Translate to world frame
                                 world_x = cam_x + x_rot
                                 world_y = cam_y + y_rot
-                                world_z = depth  # same as shelf depth
+                                world_z = depth
 
-                                # Check if this is the first time we are printing this block's position
+                                # Check if it is the initial coordinate print
                                 last_pos = self.last_printed_positions.get(color, None)
                                 if last_pos is None:
                                     # Initial print
                                     self.last_printed_positions[color] = (world_x, world_y, world_z)
                                     self.get_logger().info(f"Detected {color} block at world position: [{world_x:.2f}, {world_y:.2f}, {world_z:.2f}]")
-                                    self.color_frame_stability[color] = 0  # Reset frame count after initial print
+                                    self.color_frame_stability[color] = 0
                                 else:
-                                    # After initial print, check if the position has changed significantly
+                                    # After first print check if position changed 
                                     if self.position_changed(last_pos, (world_x, world_y, world_z), color):
                                         self.last_printed_positions[color] = (world_x, world_y, world_z)
                                         self.color_frame_stability[color] = self.color_frame_stability.get(color, 0) + 1
@@ -140,7 +140,6 @@ class MultiCameraSubscriber(Node):
                                             self.get_logger().info(f"Detected {color} block at world position: [{world_x:.2f}, {world_y:.2f}, {world_z:.2f}]")
                                             self.color_frame_stability[color] = 0  # Reset after printing
 
-                        # Optionally, you can still draw labels in the window without coordinates
                         cv2.putText(cv_image, f"{label} ({cx},{cy})", (cx + 10, cy),
                                     cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 1)
 
